@@ -6,10 +6,14 @@ import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { GoogleChartsModule } from 'angular-google-charts';
+import { ChartComponent } from './chart-component/chart.component';
+import { TableComponent } from './table-component/table.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChartComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
