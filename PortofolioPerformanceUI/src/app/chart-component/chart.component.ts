@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 
 
 export class ChartComponent {
-    title = 'Average Temperatures of Cities';
+    title = 'PortofolioNav';
     type: any= 'LineChart';
     data = [
        ["Jan",  7.0],
@@ -26,14 +26,14 @@ export class ChartComponent {
     ];
     options = {   
        hAxis: {
-          title: 'Month'
+          title: 'Day'
        },
        vAxis:{
-          title: 'Temperature'
+          title: 'Value ($)'
        },
     };
-    width = 1000;
-    height = 700;
+    width = 800;
+    height = 500;
 
 
 }
