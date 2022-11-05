@@ -1,47 +1,47 @@
 <table mat-table [dataSource]="dataSource">
     <ng-container [matColumnDef]="column.key" *ngFor="let column of columnsSchema">
-      <th mat-header-cell *matHeaderCellDef>
-        {{ column.label }}
-      </th>
-      
-      <td mat-cell *matCellDef="let element">
-        <div [ngSwitch]="column.type" *ngIf="!element.isEdit">
-          
-            <div class="btn-edit" *ngSwitchCase="'isEdit'">
-            <button mat-button (click)="element.isEdit = !element.isEdit">
-              Edit
-            </button>
-          </div>
+        <th mat-header-cell *matHeaderCellDef>
+            {{ column.label }}
+        </th>
 
-          <span *ngSwitchDefault>
-            {{ element[column.key] }}
-          </span>
-        </div>
+        <td mat-cell *matCellDef="let element">
+            <div [ngSwitch]="column.type" *ngIf="!element.isEdit">
 
-        <div [ngSwitch]="column.type" *ngIf="element.isEdit">
-          <div class="btn-edit" *ngSwitchCase="'isEdit'">
-            <button mat-button (click)="element.isEdit = !element.isEdit">
-              Done
-            </button>
-          </div>
+                <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                    <button mat-button (click)="element.isEdit = !element.isEdit">
+                        Edit
+                    </button>
+                </div>
 
-          <mat-form-field class="form-input" *ngSwitchCase="'number'">
-            <input
-              type="number"
-              matInput
-              (ngModelChange)="element[column.key] = $event"
-              [ngModel]="element[column.key]"
-            />
-          </mat-form-field>
+                <div class="btn-edit" *ngSwitchCase="'holdingValue'">
+                        {{getTotal(element)}}
+                </div>
 
-          <mat-form-field class="form-input" *ngSwitchDefault>
-            <input matInput [(ngModel)]="element[column.key]" readonly/>
-          </mat-form-field>
-        </div>
-      </td>
+                <span *ngSwitchDefault>
+                    {{ element[column.key] }}
+                </span>
+            </div>
+
+            <div [ngSwitch]="column.type" *ngIf="element.isEdit">
+                <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                    <button mat-button (click)="element.isEdit = !element.isEdit">
+                        Done
+                    </button>
+                </div>
+
+                <mat-form-field class="form-input" *ngSwitchCase="'number'">
+                    <input type="number" matInput (ngModelChange)="element[column.key] = $event"
+                        [ngModel]="element[column.key]" />
+                </mat-form-field>
+
+                <mat-form-field class="form-input" *ngSwitchDefault>
+                    <input matInput [(ngModel)]="element[column.key]" readonly />
+                </mat-form-field>
+            </div>
+        </td>
 
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-  
+</table>
+

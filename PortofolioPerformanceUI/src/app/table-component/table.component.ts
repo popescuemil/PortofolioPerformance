@@ -1,35 +1,29 @@
-import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
-import { forkJoin } from 'rxjs'
+import { Component } from '@angular/core';
 
 const USER_DATA = [
     {
         ticker: 'AAPL',
         date: "2022-10-03",
         units: 36,
-        price: 140,
-        value: 360,
-
+        price: 140.13,
     },
     {
         ticker: 'NFLX',
         date: "2022-10-03",
         units: 36,
-        price: 190,
-        value: 5600,
+        price: 190.79,
     },
     {
         ticker: 'GOOGL',
         date: "2022-10-03",
         units: 10,
-        price: 180,
-        value: 3600,
+        price: 180.62,
     },
     {
         ticker: 'TSLA',
         date: "2022-10-03",
         units: 10,
-        price: 100,
-        value: 4000,
+        price: 100.14,
     },
 ];
 
@@ -55,7 +49,7 @@ const COLUMNS_SCHEMA = [
     },
     {
         key: 'value',
-        type: 'text',
+        type: 'holdingValue',
         label: 'Holding Value ($)',
     },
     {
@@ -75,4 +69,8 @@ export class TableComponent {
     displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
     dataSource = USER_DATA;
     columnsSchema: any = COLUMNS_SCHEMA;
+
+    getTotal(element:any) {
+        return (parseFloat(element.units) * parseFloat(element.price)).toFixed(2);
+    }
 }
