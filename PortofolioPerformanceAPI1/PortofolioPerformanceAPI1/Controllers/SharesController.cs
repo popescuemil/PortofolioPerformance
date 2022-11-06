@@ -1,0 +1,27 @@
+using Microsoft.AspNetCore.Mvc;
+using PortofolioPerformanceAPI.Models;
+using PortofolioPerformanceAPI.Services;
+using System.Collections.Generic;
+
+namespace PortofolioPerformanceAPI.Controllers
+{
+    [ApiController]
+    public class SharesController : ControllerBase
+    {
+        List<SharesModel> sharesData;
+
+        [HttpGet("getData/{ticker}/{startDate}/{endDate}")]
+        public ActionResult<List<SharesModel>> GetData(string ticker, string startDate, string endDate)
+        {
+
+            sharesData = SharesService.getData(ticker, startDate, endDate);
+
+            if (sharesData == null)
+            {
+                return NotFound();
+            }
+
+            return sharesData;
+        }
+    }
+}
