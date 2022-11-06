@@ -22,18 +22,25 @@ namespace PortofolioPerformanceAPI.Services
             string[] data = null;
             WebClient wc = new WebClient();
 
-            var response = wc.DownloadString(fullURL);
-
-            data = response.Split(new[] { '\n' });
-
-            //skip first line as it contains headers
-            for(int i = 1; i< data.Length; i++)
+            try
             {
-                var values = data[i].Split(',');
-                SharesModel shareData = new SharesModel(values[0], float.Parse(values[1]), float.Parse(values[2]), float.Parse(values[3]), float.Parse(values[4]), float.Parse(values[5]), int.Parse(values[6]));
-                sharesData.Add(shareData);
+                var response = wc.DownloadString(fullURL);
+
+                data = response.Split(new[] { '\n' });
+
+                //skip first line as it contains headers
+                for (int i = 1; i < data.Length; i++)
+                {
+                    var values = data[i].Split(',');
+                    SharesModel shareData = new SharesModel(values[0], float.Parse(values[1]), float.Parse(values[2]), float.Parse(values[3]), float.Parse(values[4]), float.Parse(values[5]), int.Parse(values[6]));
+                    sharesData.Add(shareData);
+                }
+                return sharesData;
             }
-            return sharesData;
+            catch(Exception ex)
+            {
+                throw ex;
+            }          
         }
     }
 }
