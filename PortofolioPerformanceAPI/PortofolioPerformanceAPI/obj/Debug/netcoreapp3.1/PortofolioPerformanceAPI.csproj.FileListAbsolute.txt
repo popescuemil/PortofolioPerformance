@@ -46,3 +46,5 @@ F:\Portofolio Perfomance\PortofolioPerformance\PortofolioPerformanceAPI\Portofol
 F:\Portofolio Perfomance\PortofolioPerformance\PortofolioPerformanceAPI\PortofolioPerformanceAPI\obj\Debug\netcoreapp3.1\PortofolioPerformanceAPI.dll
 F:\Portofolio Perfomance\PortofolioPerformance\PortofolioPerformanceAPI\PortofolioPerformanceAPI\obj\Debug\netcoreapp3.1\PortofolioPerformanceAPI.pdb
 F:\Portofolio Perfomance\PortofolioPerformance\PortofolioPerformanceAPI\PortofolioPerformanceAPI\obj\Debug\netcoreapp3.1\PortofolioPerformanceAPI.genruntimeconfig.cache
+F:\Portofolio Perfomance\PortofolioPerformance\PortofolioPerformanceAPI\PortofolioPerformanceAPI\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+F:\Portofolio Perfomance\PortofolioPerformance\PortofolioPerformanceAPI\PortofolioPerformanceAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll

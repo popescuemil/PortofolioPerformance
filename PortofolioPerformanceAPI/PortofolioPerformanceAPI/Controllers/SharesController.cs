@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PortofolioPerformanceAPI.Models;
 using PortofolioPerformanceAPI.Services;
-using System;
 using System.Collections.Generic;
 
 namespace PortofolioPerformanceAPI.Controllers

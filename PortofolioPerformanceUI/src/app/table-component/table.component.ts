@@ -1,54 +1,30 @@
 import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { DataModel } from './data.model';
+import { DataService } from './data.service';
 
-const USER_DATA = [
+const COLUMNS = [
     {
-        ticker: 'AAPL',
-        date: "2022-10-03",
-        units: 36,
-        price: 140.13,
-    },
-    {
-        ticker: 'NFLX',
-        date: "2022-10-03",
-        units: 36,
-        price: 190.79,
-    },
-    {
-        ticker: 'GOOGL',
-        date: "2022-10-03",
-        units: 10,
-        price: 180.62,
-    },
-    {
-        ticker: 'TSLA',
-        date: "2022-10-03",
-        units: 10,
-        price: 100.14,
-    },
-];
-
-const COLUMNS_SCHEMA = [
-    {
-        key: 'ticker',
+        key: 'Ticker',
         label: 'Ticker',
     },
     {
-        key: 'date',
+        key: 'Date',
         type: 'date',
         label: 'Data Date',
     },
     {
-        key: 'units',
+        key: 'UnitsHeld',
         type: 'number',
         label: 'Units Held',
     },
     {
-        key: 'price',
-        type: 'text',
+        key: 'ClosePrice',
+        type: 'string',
         label: 'Price ($)',
     },
     {
-        key: 'value',
+        key: 'HoldingValue',
         type: 'holdingValue',
         label: 'Holding Value ($)',
     },
@@ -59,6 +35,8 @@ const COLUMNS_SCHEMA = [
     },
 ];
 
+const TICKER_LIST = [ 'AAPL', 'TSLA', 'MSFT', 'NFLX', 'GOOGL', 'AMZN'];
+
 @Component({
     selector: 'table-component',
     templateUrl: './table.component.html',
@@ -66,11 +44,33 @@ const COLUMNS_SCHEMA = [
 })
 
 export class TableComponent {
-    displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
-    dataSource = USER_DATA;
-    columnsSchema: any = COLUMNS_SCHEMA;
+    displayedColumns: string[] = COLUMNS.map((col) => col.key);
+    dataSource:  DataModel[] = [];
+    columnsSchema: any = COLUMNS;
+
+    constructor(private dataService: DataService){
+    }
+
+    ngOnInit(){
+
+        //on api side I have hardocoded some date values because yahoo finance api
+        //encodes the dates somehow so cannot use normal date, for more info check comment on api side
+        //the below dates are not used, but I have put them here in case there is need for an api switch
+        const currentDate = '06-11-2022';
+        const startDate = '03-10-2022';
+        let promises_array: Array<any> = [];
+
+        TICKER_LIST.forEach(element => {
+            promises_array.push(this.dataService.getSharesData(element, startDate, currentDate));
+        });
+
+        Promise.all(promises_array).then(results => {
+            //we flatten and sort the array by date in asc order
+            this.dataSource = results.flat(1).sort((a,b) => (a.Date < b.Date) ? -1 : 1);
+        });
+    }
 
     getTotal(element:any) {
-        return (parseFloat(element.units) * parseFloat(element.price)).toFixed(2);
+        return (parseFloat(element.UnitsHeld) * parseFloat(element.ClosePrice)).toFixed(2);
     }
 }
