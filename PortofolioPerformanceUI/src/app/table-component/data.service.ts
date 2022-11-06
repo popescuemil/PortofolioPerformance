@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { HttpClientModule, HttpClient } from "@angular/common/http";
-import { resetFakeAsyncZone } from "@angular/core/testing";
+import { HttpClient } from "@angular/common/http";
 import { DataModel } from "./data.model";
 
 @Injectable()
@@ -14,21 +13,7 @@ export class DataService {
     }
 
     getSharesData(ticker: string, startDate: string, endDate: string) {
-
-        // let promise = new Promise((resolve, reject) => {
-        //     let apiURL = `${this.baseAPIURL}?term=${term}&media=music&limit=20`;
-        //     resolve(this.http.get(apiURL))
-        // }).then(
-        //         res => {
-        //           resolve(res);
-        //         }
-        //       );
-
-        //   return promise;
-
         let data = [];
-
-
         const promise = new Promise<void>((resolve, reject) => {
             const apiURL = `${this.baseAPIURL}/${ticker}/${startDate}/${endDate}`;
             data = [];
