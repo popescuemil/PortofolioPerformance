@@ -24,7 +24,7 @@
 
             <div [ngSwitch]="column.type" *ngIf="element.isEdit">
                 <div class="btn-edit" *ngSwitchCase="'isEdit'">
-                    <button mat-button (click)="element.isEdit = !element.isEdit">
+                    <button mat-button (click)="onChange(element)">
                         Done
                     </button>
                 </div>
@@ -44,4 +44,3 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
-

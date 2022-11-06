@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +9,10 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
 
+  data: any;
+
+  sendData(data: any){
+    //create new reference of array upon change so it is dectected in chart component
+    this.data = [].concat(data);
+  }
 }

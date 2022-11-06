@@ -2,15 +2,13 @@
 <div class="float-container">
 
     <div class="float-child">
-        <table-component></table-component>
+        <table-component (dataTableToApp)="sendData($event)"></table-component>
     </div>
     
     <div class="float-child">
-        <chart-component></chart-component>
+        <chart-component [dataSource]="data"></chart-component>
     </div>
     
 </div>
-
-
 
 <router-outlet></router-outlet>
